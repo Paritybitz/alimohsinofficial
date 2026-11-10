@@ -247,10 +247,7 @@ export const sections: Sections = {
   content: {
     id: 'content',
     label: 'Content',
-    intro: {
-      text: 'A short statement about what you make and why — your creative voice in one or two lines.',
-      placeholder: true,
-    },
+    intro: { text: 'Brands I create UGC for.' },
     /** Up to three. Logos and thumbnails are optional. */
     items: [
       {
@@ -276,18 +273,13 @@ export const sections: Sections = {
   photography: {
     id: 'photography',
     label: 'Photography',
-    intro: {
-      text: 'Add three to five of your own photographs below.',
-      placeholder: true,
-    },
-    /** Three to five. Ratios shape the empty frames until real images arrive. */
-    photos: [
-      { src: '', alt: 'Photograph one', ratio: 4 / 5 },
-      { src: '', alt: 'Photograph two', ratio: 3 / 2 },
-      { src: '', alt: 'Photograph three', ratio: 4 / 5 },
-      { src: '', alt: 'Photograph four', ratio: 3 / 2 },
-      { src: '', alt: 'Photograph five', ratio: 4 / 5 },
-    ],
+    intro: { text: 'Selected photographs.' },
+    /**
+     * Three to five. While none has a `src`, the Photography chapter stays
+     * out of the navigation. Add photos, e.g.
+     * { src: '/images/photography/name.jpg', alt: 'What it shows', ratio: 4 / 5 }
+     */
+    photos: [],
     link: { label: 'More on Instagram', ref: 'instagram' },
   },
 
@@ -295,23 +287,27 @@ export const sections: Sections = {
     id: 'blog',
     label: 'Blog',
     intro: { text: 'Notes on building, creating and seeing.' },
-    /** Add a post by copying the block below. Delete the placeholder when you publish your first. */
-    posts: [
-      {
-        title: 'Your first post',
-        date: '2026-11-09',
-        summary: 'A one-line summary that appears in the list.',
-        body: [
-          'Each string in this list is one paragraph.',
-          'Write the post in src/data/portfolio.ts under sections.blog.posts, then remove this placeholder.',
-        ],
-        placeholder: true,
-      },
-    ],
+    /**
+     * Newest first. While this is empty, the Blog chapter stays out of the
+     * navigation. Add a post, e.g.
+     * { title: '…', date: '2026-11-09', summary: 'One line.', body: ['Paragraph one.'] }
+     */
+    posts: [],
     link: { label: 'More on LinkedIn', ref: 'linkedin' },
   },
 }
 
-export const sectionOrder: SectionId[] = ['career', 'projects', 'content', 'photography', 'blog']
+/** Chapters that have something to show; empty ones stay out of the navigation. */
+const hasContent: Record<SectionId, boolean> = {
+  career: true,
+  projects: true,
+  content: sections.content.items.length > 0,
+  photography: sections.photography.photos.some((photo) => photo.src),
+  blog: sections.blog.posts.length > 0,
+}
+
+export const sectionOrder: SectionId[] = (
+  ['career', 'projects', 'content', 'photography', 'blog'] satisfies SectionId[]
+).filter((id) => hasContent[id])
 
 export type SocialKey = keyof typeof socialLinks

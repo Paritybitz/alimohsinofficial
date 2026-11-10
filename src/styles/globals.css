@@ -352,6 +352,8 @@ img {
   max-width: 100%;
   height: auto;
   overflow: visible;
+  /* Centre within the header even when the subtitle line is wider than the name */
+  margin-inline: auto;
 }
 
 /* ─── Logo ────────────────────────────────────────────────── */
