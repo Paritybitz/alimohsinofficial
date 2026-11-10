@@ -119,6 +119,11 @@ export function Dialog({ open, onClose, labelledBy, className = '', children }: 
         if (!isOnContent(event.target as Element, event.clientX, event.clientY)) onClose()
       }}
     >
+      <button type="button" className="dialog__close" onClick={onClose} aria-label="Close">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M7 7l10 10M17 7L7 17" />
+        </svg>
+      </button>
       <div className="dialog__inner">{children}</div>
     </dialog>
   )

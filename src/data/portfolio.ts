@@ -41,6 +41,15 @@ export interface Project {
   placeholder?: boolean
 }
 
+export interface ContentVideo {
+  /** Video file in /public/videos/, e.g. '/videos/polar.mp4'. */
+  src: string
+  /** Still shown before it plays, e.g. '/images/content/polar-poster.webp'. */
+  poster: string
+  /** The original Instagram post. */
+  instagram: string
+}
+
 export interface ContentPiece {
   title: string
   /** Short line under the title, e.g. 'UGC creator'. */
@@ -48,6 +57,8 @@ export interface ContentPiece {
   href: string
   /** One or two sentences about the brand or piece. */
   description?: string
+  /** A video you made for them, opened in a player from the entry. */
+  video?: ContentVideo
   /** Brand logo shown on a light tile, e.g. '/images/content/polar.svg'. */
   logo?: string
   /** Optional small thumbnail, e.g. '/images/content/reel-1.jpg'. */
@@ -255,6 +266,11 @@ export const sections: Sections = {
         platform: 'UGC creator · AI browser',
         href: 'https://polarbrowser.com',
         logo: '/images/content/polar.svg',
+        video: {
+          src: '/videos/polar.mp4',
+          poster: '/images/content/polar-poster.webp',
+          instagram: 'https://www.instagram.com/p/DettOdWAUE1/',
+        },
         description:
           'An AI browser that carries out work from plain-language instructions, from quick requests to hours-long research, recruiting and sales tasks.',
       },
@@ -288,8 +304,8 @@ export const sections: Sections = {
     label: 'Blog',
     intro: { text: 'Notes on building, creating and seeing.' },
     /**
-     * Newest first. While this is empty, the Blog chapter stays out of the
-     * navigation. Add a post, e.g.
+     * Newest first. While this is empty, the chapter says the first post is on
+     * its way. Add a post, e.g.
      * { title: '…', date: '2026-11-09', summary: 'One line.', body: ['Paragraph one.'] }
      */
     posts: [],
@@ -297,13 +313,13 @@ export const sections: Sections = {
   },
 }
 
-/** Chapters that have something to show; empty ones stay out of the navigation. */
+/** Chapters shown in the navigation. Photography appears once it has a photo. */
 const hasContent: Record<SectionId, boolean> = {
   career: true,
   projects: true,
   content: sections.content.items.length > 0,
   photography: sections.photography.photos.some((photo) => photo.src),
-  blog: sections.blog.posts.length > 0,
+  blog: true,
 }
 
 export const sectionOrder: SectionId[] = (
