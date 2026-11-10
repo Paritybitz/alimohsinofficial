@@ -26,11 +26,7 @@ export function IdentityHero() {
           <path d={nameMark.d} fill="url(#name-metal)" />
         </svg>
       </h1>
-      <p className="identity__subtitle">
-        {identity.subtitle.map((line) => (
-          <span key={line}>{line}</span>
-        ))}
-      </p>
+      <p className="identity__subtitle">{identity.subtitle}</p>
     </header>
   )
 }

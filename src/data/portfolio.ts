@@ -43,8 +43,13 @@ export interface Project {
 
 export interface ContentPiece {
   title: string
+  /** Short line under the title, e.g. 'UGC creator'. */
   platform: string
   href: string
+  /** One or two sentences about the brand or piece. */
+  description?: string
+  /** Brand logo shown on a light tile, e.g. '/images/content/polar.svg'. */
+  logo?: string
   /** Optional small thumbnail, e.g. '/images/content/reel-1.jpg'. */
   thumbnail?: string
   placeholder?: boolean
@@ -100,14 +105,10 @@ export interface Sections {
 
 export const identity = {
   name: 'Ali Mohsin.',
-  subtitle: [
-    'Software engineer by profession.',
-    'Creator by curiosity.',
-    'Photographer by perspective.',
-  ],
+  subtitle: 'Software Engineer, Creator / UGC, Photographer',
   pageTitle: 'Ali Mohsin',
   metaDescription:
-    'Ali Mohsin — software engineer by profession, creator by curiosity, photographer by perspective.',
+    'Ali Mohsin — Software Engineer, Creator / UGC, Photographer.',
 }
 
 /* ── Social links (bottom of the page) ─────────────────────── */
@@ -250,11 +251,24 @@ export const sections: Sections = {
       text: 'A short statement about what you make and why — your creative voice in one or two lines.',
       placeholder: true,
     },
-    /** Up to three. Thumbnails are optional. */
+    /** Up to three. Logos and thumbnails are optional. */
     items: [
-      { title: 'Piece title', platform: 'Platform', href: '', placeholder: true },
-      { title: 'Piece title', platform: 'Platform', href: '', placeholder: true },
-      { title: 'Piece title', platform: 'Platform', href: '', placeholder: true },
+      {
+        title: 'Polar',
+        platform: 'UGC creator · AI browser',
+        href: 'https://polarbrowser.com',
+        logo: '/images/content/polar.svg',
+        description:
+          'An AI browser that carries out work from plain-language instructions, from quick requests to hours-long research, recruiting and sales tasks.',
+      },
+      {
+        title: 'DevSignal',
+        platform: 'UGC creator · Engineering talent',
+        href: 'https://www.devsignal.com',
+        logo: '/images/content/devsignal.png',
+        description:
+          'A remote-engineering talent firm that finds, screens and places senior engineers with companies on short notice.',
+      },
     ],
     link: { label: 'Follow on Instagram', ref: 'instagram' },
   },

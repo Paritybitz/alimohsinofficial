@@ -119,9 +119,6 @@ export function Dialog({ open, onClose, labelledBy, className = '', children }: 
         if (!isOnContent(event.target as Element, event.clientX, event.clientY)) onClose()
       }}
     >
-      <button type="button" className="dialog__close" onClick={onClose}>
-        Close
-      </button>
       <div className="dialog__inner">{children}</div>
     </dialog>
   )

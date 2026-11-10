@@ -378,10 +378,6 @@ img {
   text-wrap: balance;
 }
 
-.identity__subtitle span + span::before {
-  content: ' ';
-}
-
 /* ─── Chapter navigation ──────────────────────────────────── */
 
 .chapters {
@@ -574,25 +570,6 @@ a.social__link:hover {
     opacity: 0;
     transform: translate3d(0, 0.25rem, 0);
   }
-}
-
-.dialog__close {
-  position: fixed;
-  z-index: 2;
-  top: max(0.75rem, env(safe-area-inset-top));
-  right: max(0.75rem, env(safe-area-inset-right));
-  padding: 1rem 1.1rem;
-  font-family: var(--font-label);
-  font-size: 0.6875rem;
-  letter-spacing: var(--label-tracking);
-  text-transform: uppercase;
-  line-height: 1;
-  color: var(--text-tertiary);
-  transition: color 200ms var(--ease-quiet);
-}
-
-.dialog__close:hover {
-  color: var(--text-primary);
 }
 
 /* ─── Section overlay ─────────────────────────────────────── */
@@ -792,6 +769,26 @@ a.entry__title:hover {
   grid-template-columns: auto 1fr;
   align-items: center;
   gap: 1rem;
+}
+
+/* Brand logos are dark marks, so they sit on a soft champagne tile */
+.piece__logo {
+  align-self: start;
+  display: grid;
+  place-items: center;
+  width: 3.5rem;
+  aspect-ratio: 1;
+  padding: 0.7rem;
+  border-radius: 0.75rem;
+  background: var(--text-primary);
+  opacity: 0.92;
+}
+
+.piece__logo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .piece__thumb {
@@ -1060,15 +1057,6 @@ a.entry__title:hover {
 /* ─── Small screens ───────────────────────────────────────── */
 
 @media (max-width: 34rem) {
-  /* One sentence per line — reads as a deliberate three-part statement */
-  .identity__subtitle span {
-    display: block;
-  }
-
-  .identity__subtitle span + span::before {
-    content: none;
-  }
-
   /* Rows: Career / Projects, Content / Photography, then Blog */
   .chapters__list {
     max-width: 22rem;
