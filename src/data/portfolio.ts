@@ -116,10 +116,10 @@ export interface Sections {
 
 export const identity = {
   name: 'Ali Mohsin.',
-  subtitle: 'Software Engineer, Creator / UGC, Photographer',
+  subtitle: 'Software Engineer | AI | Creator | UGC',
   pageTitle: 'Ali Mohsin',
   metaDescription:
-    'Ali Mohsin — Software Engineer, Creator / UGC, Photographer.',
+    'Ali Mohsin — Software Engineer | AI | Creator | UGC.',
 }
 
 /* ── Social links (bottom of the page) ─────────────────────── */
