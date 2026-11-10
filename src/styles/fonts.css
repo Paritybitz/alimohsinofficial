@@ -1,0 +1,37 @@
+/*
+ * Font configuration
+ * ──────────────────
+ * One family throughout: D-DIN by Datto, the typeface SpaceX uses on its
+ * website. Free under the SIL Open Font License 1.1 (commercial use, web
+ * embedding and self-hosting allowed). The licence sits next to the files
+ * in src/assets/fonts/. Vite bundles them, so nothing is hotlinked.
+ *
+ * The layout only refers to the family names below, so a font can be
+ * swapped by changing its `src` line.
+ */
+
+/* Name and overlay titles — D-DIN Expanded Bold */
+@font-face {
+  font-family: 'Identity Display';
+  src: url('../assets/fonts/D-DINExp-Bold.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
+/* Labels, subtitle and body — D-DIN */
+@font-face {
+  font-family: 'Identity Text';
+  src: url('../assets/fonts/D-DIN.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Identity Text';
+  src: url('../assets/fonts/D-DIN-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
