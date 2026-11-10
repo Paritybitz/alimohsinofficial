@@ -1,6 +1,6 @@
 /**
- * Deep-space backdrop drawn on a canvas: a steady forward flight through a
- * starfield, stars streaming out from a point just behind the name. (The sunlight on top is CSS — see .ambient__sun in globals.css.)
+ * Deep-space backdrop drawn on a canvas: a sparse starfield drifting
+ * forward so slowly it reads as still. (The sunlight on top is CSS — see .ambient__sun in globals.css.)
  *
  * - Pauses when the tab is hidden.
  * - With prefers-reduced-motion, draws a single still frame.
@@ -16,8 +16,7 @@ interface Star {
   phase: number // twinkle offset
 }
 
-const DRIFT = 0.045 // depth units per second — a steady, calm flight forward
-const TRAIL = 0.035 // how far back (in depth) a near star's streak reaches
+const DRIFT = 0.006 // depth units per second — barely perceptible
 const TINTS = ['#fff4e6', '#ffe9cf', '#e9eef7', '#dfe6f2', '#fff0d9']
 
 export function startSpace(canvas: HTMLCanvasElement): () => void {
@@ -36,7 +35,7 @@ export function startSpace(canvas: HTMLCanvasElement): () => void {
     x: (Math.random() * 2 - 1) * 1.6,
     y: (Math.random() * 2 - 1) * 1.6,
     z: far ? 0.85 + Math.random() * 0.15 : 0.08 + Math.random() * 0.92,
-    size: 0.7 + Math.random() ** 3 * 1.9,
+    size: 0.5 + Math.random() ** 3 * 1.2,
     tint: TINTS[(Math.random() * TINTS.length) | 0],
     phase: Math.random() * Math.PI * 2,
     ...star,
@@ -50,7 +49,7 @@ export function startSpace(canvas: HTMLCanvasElement): () => void {
     canvas.height = Math.round(height * dpr)
     ctx!.setTransform(dpr, 0, 0, dpr, 0, 0)
 
-    const count = Math.round(Math.min(260, Math.max(110, (width * height) / 6500)))
+    const count = Math.round(Math.min(170, Math.max(70, (width * height) / 9000)))
     stars = Array.from({ length: count }, () => spawn())
   }
 
@@ -79,31 +78,16 @@ export function startSpace(canvas: HTMLCanvasElement): () => void {
         continue
       }
       const near = 1 - s.z
-      const twinkle = 0.85 + 0.15 * Math.sin(elapsed * 1.3 + s.phase)
+      const twinkle = 0.88 + 0.12 * Math.sin(elapsed * 0.6 + s.phase)
       // Fade stars as they pass behind the name and labels so text stays clean
       const ex = (px - cx) / (width * 0.34)
       const ey = (py - cy) / (height * 0.2)
       const behindText = Math.min(1, 0.45 + 0.55 * (ex * ex + ey * ey))
-      const alpha = Math.min(1, 0.62 + near * 0.8) * twinkle * behindText
-      const r = s.size * (0.65 + near * 1.7)
+      const alpha = Math.min(0.85, 0.4 + near * 0.5) * twinkle * behindText
+      const r = s.size * (0.6 + near * 0.8)
       ctx!.globalAlpha = alpha
       ctx!.fillStyle = s.tint
 
-      // Close stars leave a short streak back toward the vanishing point,
-      // which is what makes the forward motion read.
-      if (!motion.matches && s.z < 0.55) {
-        const tz = s.z + TRAIL
-        const tx = cx + (s.x / tz) * focal
-        const ty = cy + (s.y / tz) * focal
-        ctx!.strokeStyle = s.tint
-        ctx!.lineWidth = r * 1.4
-        ctx!.globalAlpha = alpha * Math.min(1, (0.55 - s.z) * 2.5) * 0.6
-        ctx!.beginPath()
-        ctx!.moveTo(tx, ty)
-        ctx!.lineTo(px, py)
-        ctx!.stroke()
-        ctx!.globalAlpha = alpha
-      }
 
       if (r < 0.9) {
         ctx!.fillRect(px - r, py - r, r * 2, r * 2)

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { sections, type SectionId } from '../data/portfolio'
 import { Dialog } from './Dialog'
 import { PlaceholderNote } from './links'
+import { BlogSection } from './sections/BlogSection'
 import { CareerSection } from './sections/CareerSection'
 import { ContentSection } from './sections/ContentSection'
 import { PhotographySection } from './sections/PhotographySection'
@@ -17,6 +18,7 @@ const bodies: Record<SectionId, () => React.JSX.Element> = {
   projects: ProjectsSection,
   content: ContentSection,
   photography: PhotographySection,
+  blog: BlogSection,
 }
 
 export function SectionOverlay({ active, onClose }: SectionOverlayProps) {

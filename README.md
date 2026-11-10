@@ -20,6 +20,17 @@ npm run preview    # serve the production build
 npm run lint       # oxlint
 ```
 
+## Deploying
+
+The site is live at **https://alimohsin.com**, served by GitHub Pages.
+
+Every push to `main` builds and deploys automatically
+(`.github/workflows/deploy.yml`). Pull requests only build and lint, so a
+broken change shows up before it goes live. Watch runs under the repo's
+**Actions** tab; you can also re-run a deploy by hand from there.
+
+The Node version used by CI is in `.nvmrc`.
+
 ## Where to edit your content
 
 Everything personal is in **`src/data/portfolio.ts`**:
@@ -29,6 +40,7 @@ Everything personal is in **`src/data/portfolio.ts`**:
 - `sections.projects`: two or three projects with tags and links
 - `sections.content`: creative statement and up to three pieces (thumbnails optional)
 - `sections.photography`: three to five photos
+- `sections.blog.posts`: blog posts (title, date, one-line summary, paragraphs). Newest first.
 
 Anything with `placeholder: true` shows a small "placeholder" tag in the
 overlay. Delete the flag when you replace the text.

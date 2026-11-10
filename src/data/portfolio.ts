@@ -13,7 +13,7 @@
  *    '/images/photography/your-file.jpg'.
  */
 
-export type SectionId = 'career' | 'projects' | 'content' | 'photography'
+export type SectionId = 'career' | 'projects' | 'content' | 'photography' | 'blog'
 
 export interface ExternalLink {
   label: string
@@ -50,6 +50,17 @@ export interface ContentPiece {
   placeholder?: boolean
 }
 
+export interface BlogPost {
+  title: string
+  /** ISO date, e.g. '2026-11-09'. Newest posts are shown first. */
+  date: string
+  /** One line shown in the list. */
+  summary: string
+  /** The post itself: one string per paragraph. */
+  body: string[]
+  placeholder?: boolean
+}
+
 export interface Photograph {
   /** Leave empty to show a placeholder frame. */
   src: string
@@ -82,6 +93,7 @@ export interface Sections {
   projects: SectionBase & { items: Project[] }
   content: SectionBase & { items: ContentPiece[] }
   photography: SectionBase & { photos: Photograph[] }
+  blog: SectionBase & { posts: BlogPost[] }
 }
 
 /* ── Identity ──────────────────────────────────────────────── */
@@ -171,8 +183,8 @@ export const sections: Sections = {
     resume: {
       src: '/images/resume.webp',
       alt: 'Ali Mohsin résumé',
-      width: 1084,
-      height: 1404,
+      width: 1190,
+      height: 1542,
     },
     link: { label: 'Full experience on LinkedIn', ref: 'linkedin' },
   },
@@ -264,8 +276,28 @@ export const sections: Sections = {
     ],
     link: { label: 'More on Instagram', ref: 'instagram' },
   },
+
+  blog: {
+    id: 'blog',
+    label: 'Blog',
+    intro: { text: 'Notes on building, creating and seeing.' },
+    /** Add a post by copying the block below. Delete the placeholder when you publish your first. */
+    posts: [
+      {
+        title: 'Your first post',
+        date: '2026-11-09',
+        summary: 'A one-line summary that appears in the list.',
+        body: [
+          'Each string in this list is one paragraph.',
+          'Write the post in src/data/portfolio.ts under sections.blog.posts, then remove this placeholder.',
+        ],
+        placeholder: true,
+      },
+    ],
+    link: { label: 'More on LinkedIn', ref: 'linkedin' },
+  },
 }
 
-export const sectionOrder: SectionId[] = ['career', 'projects', 'content', 'photography']
+export const sectionOrder: SectionId[] = ['career', 'projects', 'content', 'photography', 'blog']
 
 export type SocialKey = keyof typeof socialLinks

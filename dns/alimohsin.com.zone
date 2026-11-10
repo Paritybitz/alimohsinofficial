@@ -1,0 +1,20 @@
+; alimohsin.com -> GitHub Pages
+; Import in Cloudflare: DNS > Records > Import.
+; All records are DNS-only (grey cloud) so GitHub can issue the HTTPS certificate.
+$ORIGIN alimohsin.com.
+$TTL 1
+
+; Apex: GitHub Pages IPv4
+alimohsin.com.	1	IN	A	185.199.108.153	; cf_tags=cf-proxied:false
+alimohsin.com.	1	IN	A	185.199.109.153	; cf_tags=cf-proxied:false
+alimohsin.com.	1	IN	A	185.199.110.153	; cf_tags=cf-proxied:false
+alimohsin.com.	1	IN	A	185.199.111.153	; cf_tags=cf-proxied:false
+
+; Apex: GitHub Pages IPv6
+alimohsin.com.	1	IN	AAAA	2606:50c0:8000::153	; cf_tags=cf-proxied:false
+alimohsin.com.	1	IN	AAAA	2606:50c0:8001::153	; cf_tags=cf-proxied:false
+alimohsin.com.	1	IN	AAAA	2606:50c0:8002::153	; cf_tags=cf-proxied:false
+alimohsin.com.	1	IN	AAAA	2606:50c0:8003::153	; cf_tags=cf-proxied:false
+
+; www -> GitHub Pages (GitHub redirects www to the apex automatically)
+www.alimohsin.com.	1	IN	CNAME	paritybitz.github.io.	; cf_tags=cf-proxied:false
