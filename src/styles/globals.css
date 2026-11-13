@@ -1023,6 +1023,11 @@ a.entry__title:hover {
   color: var(--text-primary);
 }
 
+/* Date, time and reading time under the title: may wrap on phones */
+.post__meta {
+  white-space: normal;
+}
+
 .post__body {
   display: grid;
   gap: 1.1rem;

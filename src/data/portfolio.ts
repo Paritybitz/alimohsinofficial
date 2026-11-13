@@ -68,11 +68,15 @@ export interface ContentPiece {
 
 export interface BlogPost {
   title: string
-  /** ISO date, e.g. '2026-11-09'. Newest posts are shown first. */
+  /**
+   * When it was published. ISO date and time with the UTC offset,
+   * e.g. '2026-11-12T14:30:00-05:00'. A plain date ('2026-11-12') also
+   * works; the time is then not shown. Newest posts are shown first.
+   */
   date: string
-  /** One line shown in the list. */
+  /** One line shown in the list, before the post is opened. */
   summary: string
-  /** The post itself: one string per paragraph. */
+  /** The post itself: one string per paragraph. Reading time is counted from this. */
   body: string[]
   placeholder?: boolean
 }
@@ -306,9 +310,22 @@ export const sections: Sections = {
     /**
      * Newest first. While this is empty, the chapter says the first post is on
      * its way. Add a post, e.g.
-     * { title: '…', date: '2026-11-09', summary: 'One line.', body: ['Paragraph one.'] }
+     * { title: '…', date: '2026-11-12T14:30:00-05:00', summary: 'One line.', body: ['Paragraph one.'] }
+     * The /blog-post skill (.claude/skills/blog-post) writes these for you.
      */
-    posts: [],
+    posts: [
+      {
+        title: 'The weight of getting better',
+        date: '2026-11-12T20:26:16-05:00',
+        summary: 'I’m balancing an internship, two brands, school and family in Pakistan, and I’m not sure where the line is.',
+        body: [
+          'Some days I can’t tell if I’m working hard or working too much. Right now I’m interning at the Federal Reserve, building my personal brand, and making content for two tech brands while trying to get my foot in the door with both. I’m balancing school on top of that. And I’m trying to find a way to see my family in Pakistan before my full-time job starts in January.',
+          'Some days, what overwhelms me is the feedback. I ask for it constantly, and it’s good feedback. The people I ask are knowledgeable, experts in their fields. I keep every note and try to apply it as I go, because I want my skills to improve as much as possible in as little time as possible. But even good feedback adds up.',
+          'Then I look at the people I admire and what they’ve accomplished, and I don’t think I’m working more than they do. Maybe working this hard is just new to me. Or maybe I’m overworking myself.',
+          'I don’t have the answer yet. Maybe this is part of becoming the person I’m aiming to be.',
+        ],
+      },
+    ],
     link: { label: 'More on LinkedIn', ref: 'linkedin' },
   },
 }
