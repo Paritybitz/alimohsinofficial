@@ -46,8 +46,8 @@ export interface ContentVideo {
   src: string
   /** Still shown before it plays, e.g. '/images/content/polar-poster.webp'. */
   poster: string
-  /** The original Instagram post. */
-  instagram: string
+  /** The original Instagram post. Leave out to hide the link. */
+  instagram?: string
 }
 
 export interface ContentPiece {
@@ -57,8 +57,8 @@ export interface ContentPiece {
   href: string
   /** One or two sentences about the brand or piece. */
   description?: string
-  /** A video you made for them, opened in a player from the entry. */
-  video?: ContentVideo
+  /** Videos you made for them, opened in a player from the entry. Newest last. */
+  videos?: ContentVideo[]
   /** Brand logo shown on a light tile, e.g. '/images/content/polar.svg'. */
   logo?: string
   /** Optional small thumbnail, e.g. '/images/content/reel-1.jpg'. */
@@ -270,11 +270,17 @@ export const sections: Sections = {
         platform: 'UGC creator · AI browser',
         href: 'https://polarbrowser.com',
         logo: '/images/content/polar.svg',
-        video: {
-          src: '/videos/polar.mp4',
-          poster: '/images/content/polar-poster.webp',
-          instagram: 'https://www.instagram.com/p/DettOdWAUE1/',
-        },
+        videos: [
+          {
+            src: '/videos/polar.mp4',
+            poster: '/images/content/polar-poster.webp',
+            instagram: 'https://www.instagram.com/p/DettOdWAUE1/',
+          },
+          {
+            src: '/videos/polar-2.mp4',
+            poster: '/images/content/polar-2-poster.webp',
+          },
+        ],
         description:
           'An AI browser that carries out work from plain-language instructions, from quick requests to hours-long research, recruiting and sales tasks.',
       },

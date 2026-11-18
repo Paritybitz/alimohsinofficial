@@ -46,14 +46,16 @@ export function VideoViewer({ title, video, onClose }: VideoViewerProps) {
             <p id="video-caption" className="viewer__caption">
               {title}
             </p>
-            <a
-              className="viewer__step viewer__step--link"
-              href={video.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              View on Instagram
-            </a>
+            {video.instagram && (
+              <a
+                className="viewer__step viewer__step--link"
+                href={video.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View on Instagram
+              </a>
+            )}
           </div>
         </>
       )}

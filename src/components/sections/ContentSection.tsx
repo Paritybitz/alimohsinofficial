@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { sections, type ContentPiece } from '../../data/portfolio'
+import { sections, type ContentVideo } from '../../data/portfolio'
 import { resolveHref } from '../../lib/links'
 import { MaybeLink, PlaceholderNote } from '../links'
 import { VideoViewer } from '../VideoViewer'
@@ -7,7 +7,7 @@ import { SectionMore } from './SectionMore'
 
 export function ContentSection() {
   const { items, link } = sections.content
-  const [watching, setWatching] = useState<ContentPiece | null>(null)
+  const [watching, setWatching] = useState<{ title: string; video: ContentVideo } | null>(null)
   const hasVisuals = items.some((piece) => piece.logo || piece.thumbnail)
 
   return (
@@ -35,24 +35,40 @@ export function ContentSection() {
                 </h3>
                 <p className="entry__meta">{piece.platform}</p>
                 {piece.description && <p className="entry__text">{piece.description}</p>}
-                {piece.video && (
-                  <button
-                    type="button"
-                    className="piece__watch"
-                    aria-haspopup="dialog"
-                    onClick={() => setWatching(piece)}
-                  >
-                    <span className="piece__poster">
-                      <img src={piece.video.poster} alt="" loading="lazy" />
-                      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                        <path d="M9 6.5v11l9-5.5z" />
-                      </svg>
-                    </span>
-                    <span className="piece__watch-label">
-                      Watch the video
-                      <span className="visually-hidden"> for {piece.title}</span>
-                    </span>
-                  </button>
+                {piece.videos && piece.videos.length > 0 && (
+                  <div className="piece__videos">
+                    {piece.videos.map((video, v, all) => (
+                      <button
+                        key={video.src}
+                        type="button"
+                        className="piece__watch"
+                        aria-haspopup="dialog"
+                        onClick={() => setWatching({ title: piece.title, video })}
+                      >
+                        <span className="piece__poster">
+                          <img src={video.poster} alt="" loading="lazy" />
+                          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <path d="M9 6.5v11l9-5.5z" />
+                          </svg>
+                        </span>
+                        {all.length === 1 ? (
+                          <span className="piece__watch-label">
+                            Watch the video
+                            <span className="visually-hidden"> for {piece.title}</span>
+                          </span>
+                        ) : (
+                          <span className="visually-hidden">
+                            Watch video {v + 1} of {all.length} for {piece.title}
+                          </span>
+                        )}
+                      </button>
+                    ))}
+                    {piece.videos.length > 1 && (
+                      <span className="piece__watch-label" aria-hidden="true">
+                        Watch the videos
+                      </span>
+                    )}
+                  </div>
                 )}
               </div>
             </li>

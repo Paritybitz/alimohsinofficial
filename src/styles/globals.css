@@ -848,6 +848,20 @@ a.entry__title:hover {
   transition: color 200ms var(--ease-quiet);
 }
 
+/* One or more video thumbnails in a row, with one label after them */
+.piece__videos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 0.875rem;
+  margin-top: 0.5rem;
+  color: var(--text-tertiary);
+}
+
+.piece__videos .piece__watch {
+  margin-top: 0;
+}
+
 .piece__poster {
   position: relative;
   display: block;
