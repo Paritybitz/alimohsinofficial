@@ -1266,11 +1266,55 @@ a.entry__title:hover {
   }
 }
 
+/* ─── Arrival ─────────────────────────────────────────────── */
+
+/* On first load each piece rises a little and comes into focus out of a
+   blur, cascading top to bottom like light resolving through a lens.
+   Only the start is defined, so every element lands on its own styles
+   (the brand keeps its 0.92 opacity, hover transforms stay untouched). */
+@keyframes rise-into-focus {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+    filter: blur(12px);
+  }
+}
+
+.brand,
+.identity__name,
+.identity__subtitle,
+.chapters__item,
+.social__item {
+  animation: rise-into-focus 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) var(--arrive, 0s) backwards;
+}
+
+.brand { --arrive: 0s; }
+.identity__name { --arrive: 0.15s; }
+.identity__subtitle { --arrive: 0.3s; }
+.chapters__item { --arrive: 0.45s; }
+.chapters__item:nth-child(2) { --arrive: 0.51s; }
+.chapters__item:nth-child(3) { --arrive: 0.57s; }
+.chapters__item:nth-child(4) { --arrive: 0.63s; }
+.chapters__item:nth-child(5) { --arrive: 0.69s; }
+.chapters__item:nth-child(6) { --arrive: 0.75s; }
+.social__item { --arrive: 0.8s; }
+.social__item:nth-child(2) { --arrive: 0.85s; }
+.social__item:nth-child(3) { --arrive: 0.9s; }
+.social__item:nth-child(4) { --arrive: 0.95s; }
+
 /* ─── Reduced motion ──────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
   :root {
     --overlay-duration: 1ms;
+  }
+
+  .brand,
+  .identity__name,
+  .identity__subtitle,
+  .chapters__item,
+  .social__item {
+    animation: none;
   }
 
   .ambient__layer {
